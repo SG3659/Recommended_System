@@ -7,7 +7,16 @@ const embeddings = new VoyageEmbeddings({
 
 // this function  covert the string in embedding
 export const embed = async (text: string) => {
-  const embedding = await embeddings.embedQuery(text);
-  return embedding;
+  try {
+    if (!text) {
+      throw new Error("Text input is required for embedding");
+    }
+    console.log("Embedding text:", text); // Add logging here
+    const embedding = await embeddings.embedQuery(text);
+    return embedding;
+  } catch (error) {
+    console.error("Error in embed function:", error);
+    throw error;
+  }
 };
 
